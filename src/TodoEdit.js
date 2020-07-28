@@ -13,12 +13,14 @@ export default function TodoEdit({id, task, editTodo, toggle}) {
                 reset(); 
                 toggle();
             }}
+            style={{marginLeft:"1rem", width:'50%'}}
         >
             <TextField 
                 value={value} 
                 onChange={handleChange} 
                 margin="normal"
                 fullWidth
+                autoFocus
             /> 
         </form>
     )

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import {v4 as uuidv4} from 'uuid'; 
 import Typography from '@material-ui/core/Typography';
 import Paper from '@material-ui/core/Paper';
@@ -9,12 +9,26 @@ import TodoList from './TodoList';
 import TodoForm from './TodoForm';
 
 function TodoApp() {
-    const initialTodos = [
-        {id: uuidv4(), task: 'Clean', completed: false},
-        {id: uuidv4(), task: 'Eat', completed: true},
-        {id: uuidv4(), task: 'Shower', completed: false}
-    ]
+    // HERE WERE PERSISTING DATA by using localStore.getItem 
+    // we're checking if there's something in LocalStorage then 
+    // use that as a initial state, if not, then just show an empty array 
+    const initialTodos = JSON.parse(window.localStorage.getItem('todos')) || '[]'
+    // const initialTodos = [
+    //     {id: uuidv4(), task: 'Clean', completed: false},
+    //     {id: uuidv4(), task: 'Eat', completed: true},
+    //     {id: uuidv4(), task: 'Shower', completed: false}
+    // ]
     const [todos, setTodos] = useState(initialTodos);
+
+    //SAVING ANY UPDATES TO LOCAL STORAGE 
+    //here we want to sync todos to localStorage
+    //we're storing it under the key 'todos'
+    //we have to stringify it because it only takes a string (and this is an object)
+    // lastly, we pass in the [todos] array just to specify, if anything changes with todos
+    // then do everything above or render only things related to 'todos'
+    useEffect(() => {
+        window.localStorage.setItem('todos', JSON.stringify(todos))
+    }, [todos]); 
 
     const addTodo = newTodoText => {
         // addTodo will take in newTodoText
