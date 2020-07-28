@@ -1,28 +1,25 @@
 import React from 'react'; 
 import useInputState from './hooks/useInputState';
 import TextField from '@material-ui/core/TextField';
-import Paper from '@material-ui/core/Paper';
 
-// here we pass in the function addTodo (instead of props) that was passed in as props 
-export default function TodoEdit({editTodo}) {
-    const [value, handleChange, reset] = useInputState(''); 
+export default function TodoEdit({id, task, editTodo, toggle}) {
+    const [value, handleChange, reset] = useInputState(task); 
 
     return(
-        <Paper style={{margin: '1rem 0', padding: '0 1rem'}}>
-            <form
-                onSubmit={e => {
-                    e.preventDefault();
-                    // addTodo(value);
-                    reset(); 
-                }}
-            >
-                <TextField 
-                    value={value} 
-                    onChange={handleChange} 
-                    margin="normal"
-                    fullWidth
-                /> 
-            </form>
-        </Paper>
+        <form
+            onSubmit={e => {
+                e.preventDefault();
+                editTodo(id, value);
+                reset(); 
+                toggle();
+            }}
+        >
+            <TextField 
+                value={value} 
+                onChange={handleChange} 
+                margin="normal"
+                fullWidth
+            /> 
+        </form>
     )
 }
