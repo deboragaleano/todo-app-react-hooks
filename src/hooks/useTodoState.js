@@ -1,9 +1,9 @@
-import { useState } from 'react'
+import useLocalStorageState from './useLocalStorageState'; 
 import {v4 as uuidv4} from 'uuid'; 
 
 //this function doesnt have a name 
 export default initialTodos => {
-    const [todos, setTodos] = useState(initialTodos);
+    const [todos, setTodos] = useLocalStorageState('todos', initialTodos); 
 
     //we're going to return an object and ALL of the methods 
     //First 'todos' is with reference to the state that we need to export as well 
