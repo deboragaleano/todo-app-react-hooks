@@ -7,7 +7,7 @@ import {TodosContext} from './contexts/todos.context';
 // here we pass in the function addTodo (instead of props) that was passed in as props 
 export default function TodoForm() {
     const [value, handleChange, reset] = useInputState(''); 
-    const {addTodo} = useContext(TodosContext);
+    const {dispatch} = useContext(TodosContext);
 
     return(
         <Paper style={{margin: '1rem 0', padding: '0 1rem'}}>
@@ -17,7 +17,7 @@ export default function TodoForm() {
                 // and reset it after its sent 
                 onSubmit={e => {
                     e.preventDefault();
-                    addTodo(value);
+                    dispatch({type: 'ADD', task: value});
                     reset(); 
                 }}
             >

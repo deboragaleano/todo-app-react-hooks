@@ -11,15 +11,16 @@ import Checkbox from '@material-ui/core/Checkbox';
 import {TodosContext} from './contexts/todos.context';
 
 function Todo({id, task, completed}) {
+    // here we just pass in the dispatch function to use for the REMOVE / TOGGLE 
+    const {dispatch} = useContext(TodosContext); 
     //the value useToggle defaults to false anyway 
-    const {toggleTodo, removeTodo} = useContext(TodosContext); 
     const [isEditing, toggle] = useToggle(); 
     
     return(
         <ListItem>
             {isEditing ? <TodoEdit task={task} id={id} toggle={toggle} /> :
             <>
-                <Checkbox tabIndex={-1} checked={completed} onChange={() => toggleTodo(id)}/>
+                <Checkbox tabIndex={-1} checked={completed} onChange={() => dispatch({type: 'TOGGLE', id: id})}/>
                 <ListItemText
                     style={{textDecoration: completed ? 'line-through' : 'none'}}
                     >{task}
@@ -28,7 +29,7 @@ function Todo({id, task, completed}) {
                     <IconButton aria-label="Edit" onClick={toggle}>
                         <EditIcon /> 
                     </IconButton>
-                    <IconButton aria-label="Delete" onClick={() => removeTodo(id)}>
+                    <IconButton aria-label="Delete" onClick={() => dispatch({type: 'REMOVE', id: id})}>
                         <DeleteIcon /> 
                     </IconButton>
                 </ListItemSecondaryAction>
