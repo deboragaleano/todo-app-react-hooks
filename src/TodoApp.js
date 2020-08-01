@@ -10,13 +10,6 @@ import TodoForm from './TodoForm';
 import {TodosProvider} from './contexts/todos.context'; 
 
 function TodoApp() {
-    const initialTodos = [{id: 1, task: 'Clean', completed: false}]
-    
-    //we get the object with the methods and everything else from the function in the file useTodoState
-    const {todos, addTodo, removeTodo, toggleTodo, editTodo} = useTodoState(initialTodos)
-
-
-
     return(
             <Paper style={{
                 padding: 0,
@@ -33,13 +26,8 @@ function TodoApp() {
                 <Grid container justify="center" style={{marginTop: '1rem'}}>
                     <Grid item xs={11} md={8} lg={4}>
                         <TodosProvider>
-                            <TodoForm addTodo={addTodo}/>
-                            <TodoList 
-                                todos={todos} 
-                                removeTodo={removeTodo}
-                                toggleTodo={toggleTodo}  
-                                editTodo={editTodo}  
-                            /> 
+                            <TodoForm />
+                            <TodoList /> 
                         </TodosProvider>    
                     </Grid>
                 </Grid>
