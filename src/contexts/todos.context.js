@@ -1,5 +1,6 @@
-import React, {createContext, useReducer} from 'react';
+import React, {createContext} from 'react';
 import reducer from '../reducers/todo.reducer'; 
+import {useLocalStorageReducer} from '../hooks/useLocalStorageReducer';
 
 // here we can create 2 contexts 
 export const TodosContext = createContext();
@@ -8,7 +9,7 @@ export const DispatchContext = createContext();
 const defaultValues = [{id: 1, task: 'Clean', completed: false}]; 
 
 export function TodosProvider(props) {
-    const [todos, dispatch] = useReducer(reducer, defaultValues); 
+    const [todos, dispatch] = useLocalStorageReducer('todos', defaultValues, reducer); 
     
     return (
         // split the values into 2 contexts 
