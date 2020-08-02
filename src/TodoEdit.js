@@ -1,10 +1,11 @@
 import React, {useContext} from 'react';
 import useInputState from './hooks/useInputState';
 import TextField from '@material-ui/core/TextField';
-import {TodosContext} from './contexts/todos.context';
+import {DispatchContext} from './contexts/todos.context';
 
 export default function TodoEdit({id, task, toggle}) {
-    const {dispatch} = useContext(TodosContext); 
+    //dispatch is not an object anymore, so we just grab dispatch from the context
+    const dispatch = useContext(DispatchContext); 
     const [value, handleChange, reset] = useInputState(task); 
 
     return(

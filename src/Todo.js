@@ -8,11 +8,11 @@ import EditIcon from '@material-ui/icons/Edit';
 import IconButton from '@material-ui/core/IconButton';
 import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction';
 import Checkbox from '@material-ui/core/Checkbox';
-import {TodosContext} from './contexts/todos.context';
+import {DispatchContext} from './contexts/todos.context';
 
 function Todo({id, task, completed}) {
     // here we just pass in the dispatch function to use for the REMOVE / TOGGLE 
-    const {dispatch} = useContext(TodosContext); 
+    const dispatch = useContext(DispatchContext); 
     //the value useToggle defaults to false anyway 
     const [isEditing, toggle] = useToggle(); 
     

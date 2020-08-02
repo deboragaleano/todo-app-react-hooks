@@ -1,8 +1,9 @@
 import React, {createContext, useReducer} from 'react';
 import reducer from '../reducers/todo.reducer'; 
-// import useTodoState from '../hooks/useTodoState';
 
+// here we can create 2 contexts 
 export const TodosContext = createContext();
+export const DispatchContext = createContext();  
 
 const defaultValues = [{id: 1, task: 'Clean', completed: false}]; 
 
@@ -10,9 +11,13 @@ export function TodosProvider(props) {
     const [todos, dispatch] = useReducer(reducer, defaultValues); 
     
     return (
-        // we pass in todos and dispatch in an object 
-        <TodosContext.Provider value={{todos, dispatch}}>
+        // split the values into 2 contexts 
+        // if it's nested, then we can access all the values from the 
+        // todoscontext provider (we don't have to add dispatch context in the TodoApp)
+        <TodosContext.Provider value={todos}>
+            <DispatchContext.Provider value={dispatch}>
             {props.children}
+            </DispatchContext.Provider>
         </TodosContext.Provider>
     );
 }
