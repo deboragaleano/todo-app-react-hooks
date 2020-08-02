@@ -1,4 +1,4 @@
-import React, {useContext} from 'react';
+import React, {useContext, memo} from 'react';
 import useToggle from './hooks/useToggle'; 
 import TodoEdit from './TodoEdit'
 import ListItem from '@material-ui/core/ListItem';
@@ -39,4 +39,10 @@ function Todo({id, task, completed}) {
     )
 }
 
-export default Todo; 
+// memo comes from React, to remember things that were there before 
+// and render the cache result when the same inputs occur again
+//  and only if something changes then we do render.. 
+// so basically react is saying, if nothing changes
+// then 'use the old version that was there before'
+// this is the PureComponent in class but React.memo in functional 
+export default memo(Todo); 
